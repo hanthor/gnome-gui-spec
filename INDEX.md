@@ -61,6 +61,9 @@ Each has Blueprint + XML + code examples.
 ## App Audits
 Individual audit reports for 12 GNOME apps in [audits/](audits/).
 
+## HIG Reference
+16 official GNOME HIG pages extracted to markdown in [reference/hig/](reference/hig/).
+
 ---
 
 **Quick Start for Agents**: Read `skills/quick-start/SKILL.md` + `tokens/typography.md` + `tokens/spacing.md`.
