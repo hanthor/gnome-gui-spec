@@ -73,5 +73,10 @@ All 47 content pages from the official [GNOME Human Interface Guidelines](https:
 | # | File | Topic |
 |---|------|-------|
 | 44 | [keyboard-shortcuts.md](hig/keyboard-shortcuts.md) | Standard Keyboard Shortcuts |
-| 45 | [palette.md](hig/palette.md) | Color Palette |
-| 46 | [backgrounds.md](hig/backgrounds.md) | Backgrounds |
+| 45 | [palette.md](hig/palette.md) | Color Palette (all RGB/hex values) |
+| 46 | [backgrounds.md](hig/backgrounds.md) | Background Wallpapers |
+
+## Icon Catalog
+| # | File | Topic |
+|---|------|-------|
+| 47 | [icons.md](../icons.md) | **645 symbolic icons** by category |
