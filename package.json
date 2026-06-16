@@ -1,0 +1,21 @@
+{
+  "name": "gnome-gui-spec",
+  "version": "1.1.0",
+  "description": "GNOME GUI specification, design tokens, component library, and agent skills for building GNOME-compliant GTK4/libadwaita applications",
+  "keywords": [
+    "pi-package",
+    "gnome",
+    "gtk",
+    "libadwaita",
+    "gui",
+    "design-system"
+  ],
+  "author": "hanthor",
+  "license": "Apache-2.0",
+  "repository": "github.com/hanthor/gnome-gui-spec",
+  "pi": {
+    "skills": [
+      "./skills"
+    ]
+  }
+}
