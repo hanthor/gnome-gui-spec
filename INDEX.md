@@ -4,6 +4,8 @@
 
 ## Master Reference
 - **[GNOME-AGENT-GUIDE.md](GNOME-AGENT-GUIDE.md)** — Complete 12-section specification (v1.1.0)
+- **[COMPONENT-LIBRARY.md](COMPONENT-LIBRARY.md)** — 42-component catalog with Blueprint/XML examples (v0.2.0)
+- **[INTENT-MAP.md](INTENT-MAP.md)** — Intent → pattern → code example lookup (34 apps)
 
 ## Skills (How-To Guides)
 Each folder teaches one specific GNOME pattern.
@@ -59,7 +61,9 @@ Each has Blueprint + XML + code examples.
 | 4 | [icons.md](tokens/icons.md) | Symbolic icon reference by category |
 
 ## App Audits
-Individual audit reports for 12 GNOME apps in [audits/](audits/).
+Individual audit reports for 28 GNOME Core apps + 6 Dev Tool scans in [audits/](audits/).
+
+**Dev Tool scans** (Builder, D-Spy, Sysprof, Manuals, Boxes, Dconf Editor) — included in the component library, intent map, and agent guide.
 
 ## HIG Reference
 16 official GNOME HIG pages extracted to markdown in [reference/hig/](reference/hig/).

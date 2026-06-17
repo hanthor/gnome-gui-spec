@@ -1,9 +1,8 @@
 # GNOME GUI Specification & Agent Authoring Guide
 
-> **Compiled from**: GNOME HIG v47 + source audits of 9 GNOME Core apps  
-> (Settings, Text Editor, Files, Calculator, Clocks, Weather, Image Viewer, Software, Calendar)  
+> **Compiled from**: GNOME HIG v47 + source audits of 34 GNOME apps (28 Core + 6 Dev Tools)  
 > **Purpose**: Single definitive reference for AI agents constructing GNOME-compliant applications.  
-> **Version**: 1.0.0
+> **Version**: 1.1.0
 
 ---
 
@@ -66,17 +65,24 @@ margin-top: 12; margin-bottom: 12; margin-start: 12; margin-end: 12;
 | Property | Value | App |
 |----------|-------|-----|
 | `min-sidebar-width` | `255`–`280` | Property sidebars |
+| `min-sidebar-width` | `300` | Manuals sidebar |
 | `min-sidebar-width` | `350` | Document properties (Text Editor) |
+| `sidebar-width-fraction` | `0.5` | D-Spy navigation split (50%) |
+| `sidebar-width-fraction` | `0.66` | D-Spy overlay split (66%) |
+| `max-sidebar-width` | `400` | D-Spy navigation split |
+| `max-sidebar-width` | `800` | D-Spy overlay split |
 
 ### 2.5 Breakpoint Values
 
 | Condition | App | Effect |
 |-----------|-----|--------|
 | `max-width: 400sp` | Text Editor | Buttons become icon-only |
-| `max-width: 500sp` | Settings | ViewSwitcher→WindowTitle, reveal ViewSwitcherBar |
+| `max-width: 500sp` | Settings, D-Spy | ViewSwitcher→WindowTitle, reveal ViewSwitcherBar; nested split view collapses |
+| `max-width: 560sp` | Builder | Preferences sidebar collapses |
 | `max-width: 590sp` | Loupe | Layout switches to narrow |
-| `max-width: 600sp` | Clocks | Reveal ViewSwitcherBar |
+| `max-width: 600sp` | Clocks, Manuals | Reveal ViewSwitcherBar; full layout swap wide→narrow via MultiLayoutView |
 | `max-width: 650sp` | Text Editor | Layout switches to narrow |
+| `max-width: 700sp` | D-Spy | Outer OverlaySplitView collapses to overlay mode |
 | `min-width: 590sp` | Loupe | Layout switches to wide |
 
 ### 2.6 Typography
@@ -356,6 +362,11 @@ Adw.ActionRow {
 ```
 
 **Slots**: `[prefix]` (CheckButton for radios, icon), `[suffix]` (Switch, Scale, Combo, Label)
+
+**Additional properties**:
+| Property | Type | Notes |
+|----------|------|-------|
+| `subtitle-selectable` | bool | Makes subtitle text selectable for copy-paste (use in debugger/inspector tools). See D-Spy: `sources/dspy/src/dspy-window.ui:933`. |
 
 ---
 
@@ -1058,6 +1069,61 @@ AdwApplicationWindow (960×720)
 **Use when**: Feature tour, onboarding slideshow, or image carousel.
 **Navigation**: Previous/Next overlay buttons. Last page has `suggested-action` "Start" button.
 **Page template**: SVG image (`GtkPicture`), `title-1` heading (margin-top: 36), `body` text (lines: 2).
+
+### 5.8 MultiLayout Wide/Narrow (Manuals)
+
+```
+AdwApplicationWindow
+├── AdwBreakpoint { condition ("max-width: 600sp"); setters { multi_layout.layout-name: "narrow"; }; }
+└── AdwMultiLayoutView multi_layout
+    ├── wide: AdwLayout
+    │   ├── AdwLayoutSlot "statusbar"
+    │   │   └── PanelStatusbar { [prefix] PathBar }
+    │   └── AdwLayoutSlot "stack"
+    │       ├── AdwTabView tabs { menu-model: tab_menu; }
+    │       └── AdwTabBar tab_bar { view: tabs; }
+    └── narrow: AdwLayout
+        └── AdwLayoutSlot "sidebar_contents"
+            └── AdwNavigationSplitView
+                ├── sidebar: AdwNavigationPage list + search
+                └── content: AdwNavigationPage
+                    └── AdwToolbarView
+                        ├── [top] AdwHeaderBar { AdwTabButton { view: tabs; } }
+                        ├── content: AdwTabOverview { child: tabs; }
+                        └── [bottom] toolbar
+```
+
+**Use when**: App needs completely different widget trees at different widths (not just property changes).
+**Source**: `sources/manuals/src/manuals-window.ui`
+
+### 5.9 Developer Inspector / Viewer App (D-Spy)
+
+```
+AdwApplicationWindow
+├── AdwBreakpoint { condition ("max-width: 700sp"); setters { outer_split.collapsed: true; }; }
+├── AdwBreakpoint { condition ("max-width: 500sp"); setters { inner_split.collapsed: true; signal::apply handler; }; }
+└── AdwOverlaySplitView outer_split
+    ├── content: AdwNavigationSplitView inner_split
+    │   ├── sidebar: AdwNavigationView
+    │   │   └── AdwNavigationPage
+    │   │       └── AdwToolbarView
+    │   │           ├── [top] AdwHeaderBar { AdwWindowTitle; GtkSearchEntry (bidirectional filter); }
+    │   │           └── content: GtkListView (navigation-sidebar, no-selection)
+    │   │               ├── factory: GtkBuilderListItemFactory (inline)
+    │   │               └── model: GtkFilterListModel → GtkStringFilter → GtkSortListModel
+    │   └── content: AdwNavigationView
+    │       └── AdwNavigationPage (detail)
+    │           └── AdwToolbarView
+    │               ├── [top] AdwHeaderBar { AdwWindowTitle }
+    │               └── content: GtkStack (empty / property / signal / method)
+    │                   └── AdwPreferencesPage
+    │                       └── AdwPreferencesGroup
+    │                           └── AdwActionRow { subtitle-selectable: true; property CSS; }
+    └── sidebar: (not used — one-pane in narrow mode)
+```
+
+**Use when**: Master-detail inspector/debugger with searchable lists and selectable property text.
+**Key patterns**: `subtitle-selectable`, bidirectional filter binding, nested split views, inline `GtkBuilderListItemFactory`.
 
 ---
 

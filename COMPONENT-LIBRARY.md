@@ -1161,6 +1161,311 @@ Use instead of `GtkLabel` when you need text-overflow behavior:
 
 ---
 
+### 4.33 AdwMultiLayoutView + AdwLayout + AdwLayoutSlot
+
+**Adaptive container that swaps entirely different layouts based on breakpoints.**
+
+```xml
+<object class="AdwMultiLayoutView" id="multi_layout">
+  <child>
+    <object class="AdwLayout">
+      <property name="name">wide</property>
+      <child>
+        <object class="AdwLayoutSlot">
+          <property name="id">statusbar</property>
+          <object class="PanelStatusbar">...</object>
+        </object>
+      </child>
+      <child>
+        <object class="AdwLayoutSlot">
+          <property name="id">stack</property>
+          <object class="AdwTabView" id="tabs">...</object>
+        </object>
+      </child>
+    </object>
+  </child>
+  <child>
+    <object class="AdwLayout">
+      <property name="name">narrow</property>
+      <child>
+        <object class="AdwLayoutSlot">
+          <property name="id">sidebar_contents</property>
+          <object class="AdwNavigationSplitView">...</object>
+        </object>
+      </child>
+    </object>
+  </child>
+</object>
+```
+
+**Use with AdwBreakpoint**:
+```xml
+<object class="AdwBreakpoint">
+  <condition>max-width: 600sp</condition>
+  <setter object="multi_layout" property="layout-name">narrow</setter>
+</object>
+```
+
+**Real usage**: `sources/manuals/src/manuals-window.ui:63-400` — Manuals swaps between a PanelDock-based wide layout and an AdwNavigationSplitView-based narrow layout at 600sp.
+
+---
+
+### 4.34 AdwTabView + AdwTabBar + AdwTabOverview + AdwTabButton
+
+**Full tabbed-browser pattern for multi-document apps.**
+
+```xml
+<object class="AdwTabView" id="tab_view">
+  <property name="hexpand">true</property>
+  <property name="vexpand">true</property>
+  <property name="menu-model">tab_menu</property>
+  <signal name="close-page" handler="on_tab_close"/>
+  <property name="child">
+    <!-- page content goes here, one per AdwTabPage -->
+  </property>
+</object>
+```
+
+**TabBar (wide layout)**:
+```xml
+<object class="AdwTabBar" id="tab_bar">
+  <property name="view">tab_view</property>
+</object>
+```
+
+**TabOverview + TabButton (narrow layout — replaces TabBar)**:
+```xml
+<object class="AdwTabOverview">
+  <property name="child">tab_view</property>
+</object>
+<object class="AdwTabButton">
+  <property name="view">tab_view</property>
+</object>
+```
+
+**Real usage**: `sources/manuals/src/manuals-window.ui:137-400` — wide layout uses `AdwTabBar`, narrow layout uses `AdwTabOverview` + `AdwTabButton`.
+
+---
+
+### 4.35 AdwSplitButton
+
+**Dropdown button that has a primary action + secondary popover of alternatives.**
+
+```xml
+<object class="AdwSplitButton" id="run_button">
+  <property name="menu-model">run_menu</property>
+  <property name="icon-name">media-playback-start-symbolic</property>
+  <property name="tooltip-text" translatable="yes">Run Project</property>
+</object>
+```
+
+**Real usage**: `sources/builder/src/libide/gui/ide-run-button.ui:6` — Builder's Run button.
+
+---
+
+### 4.36 AdwSpinnerPaintable
+
+**A paintable spinner that can be embedded inside AdwStatusPage as an icon.**
+
+```xml
+<object class="AdwStatusPage">
+  <property name="title" translatable="yes">Loading…</property>
+  <property name="icon-name">content-loading-symbolic</property>
+  <property name="child">
+    <object class="AdwSpinnerPaintable"/>
+  </property>
+</object>
+```
+
+**Real usage**: `sources/manuals/src/manuals-window.ui:81-83` — loading state in Manuals.
+
+---
+
+### 4.37 GtkWindowHandle
+
+**Draggable handle for floating/movable windows.**
+
+```xml
+<object class="AdwWindow">
+  <property name="child">
+    <object class="AdwToolbarView">
+      <child type="top">
+        <object class="GtkWindowHandle">
+          <object class="AdwHeaderBar">...</object>
+        </object>
+      </child>
+      <property name="content">...</property>
+    </object>
+  </property>
+</object>
+```
+
+**Real usage**: `sources/sysprof/src/sysprof/sysprof-recording-pad.ui:12` — Sysprof's floating recording pad uses `GtkWindowHandle` for drag-to-move.
+
+---
+
+### 4.38 GtkFilterListModel + GtkStringFilter (Bidirectional)
+
+**Live search filtering with bidirectional binding between search entry and filter.**
+
+```xml
+<object class="GtkSearchEntry">
+  <binding name="text">
+    <lookup name="search" type="GtkStringFilter">filter</lookup>
+  </binding>
+</object>
+
+<object class="GtkStringFilter" id="filter">
+  <property name="expression">
+    <lookup name="name" type="MyItem"/>
+  </property>
+</object>
+
+<object class="GtkFilterListModel">
+  <property name="model">base_model</property>
+  <property name="filter">filter</property>
+</object>
+```
+
+**The `bind-flags="sync-create|bidirectional"` pattern** (from D-Spy):
+```xml
+<binding name="text">
+  <lookup name="search">names_filter</lookup>
+  <binding-source="sync-create|bidirectional" />
+</binding>
+```
+
+**Real usage**: `sources/dspy/src/dspy-window.ui:192` — D-Spy's search bars bind bidirectionally to GtkStringFilter.
+
+---
+
+### 4.39 GtkAnyFilter + GtkBoolFilter + GtkEveryFilter
+
+**Boolean compound filters for complex data filtering.**
+
+```xml
+<!-- OR filter: matches if ANY child filter matches -->
+<object class="GtkAnyFilter">
+  <child>
+    <object class="GtkStringFilter">
+      <property name="expression">
+        <lookup name="sender" type="SomeType"/>
+      </property>
+    </object>
+  </child>
+  <child>
+    <object class="GtkStringFilter">
+      <property name="expression">
+        <lookup name="destination" type="SomeType"/>
+      </property>
+    </object>
+  </child>
+</object>
+```
+
+```xml
+<!-- AND+invert filter: "installed AND not EOL" -->
+<object class="GtkEveryFilter">
+  <child>
+    <object class="GtkBoolFilter">
+      <property name="expression">
+        <lookup name="is-installed" type="Bundle"/>
+      </property>
+    </object>
+  </child>
+  <child>
+    <object class="GtkBoolFilter">
+      <property name="expression">
+        <lookup name="is-end-of-life" type="Bundle"/>
+      </property>
+      <property name="invert">true</property>
+    </object>
+  </child>
+</object>
+```
+
+**Real usage**: `sources/sysprof/src/sysprof/sysprof-dbus-section.ui:82` (AnyFilter for multi-field D-Bus search), `sources/manuals/src/manuals-bundle-dialog.ui:113-148` (BoolFilter+EveryFilter for installed/available SDK lists).
+
+---
+
+### 4.40 GtkFlattenListModel + GtkMapListModel
+
+**Model transformations for nested/grouped data.**
+
+```xml
+<!-- Flatten nested list of lists into a single flat list -->
+<object class="GtkFlattenListModel">
+  <property name="model">counters_model</property>
+</object>
+
+<!-- Transform each item via a map function -->
+<object class="GtkMapListModel">
+  <property name="model">marks_model</property>
+</object>
+```
+
+**Real usage**: `sources/sysprof/src/sysprof/sysprof-cpu-section.ui:140` (FlattenListModel for counter data), `sources/sysprof/src/sysprof/sysprof-mark-chart.ui:23` (MapListModel for mark chart items).
+
+---
+
+### 4.41 GtkListHeader (Section Headers in ListView)
+
+**Sticky section headers inside a GtkListView.**
+
+```xml
+<object class="GtkBuilderListItemFactory">
+  <property name="bytes"><![CDATA[
+    <interface>
+      <template class="GtkListHeader">
+        <property name="child">
+          <object class="GtkLabel">
+            <binding name="label">
+              <closure type="gchararray" function="get_header_text">
+                <lookup name="item" type="MyItem">header_item</lookup>
+              </closure>
+            </binding>
+            <style>
+              <class name="title"/>
+            </style>
+          </object>
+        </property>
+      </template>
+    </interface>
+  ]]></property>
+</object>
+```
+
+**Wire to ListView**:
+```xml
+<object class="GtkListView">
+  <property name="factory">item_factory</property>
+  <property name="header-factory">header_factory</property>
+</object>
+```
+
+**Real usage**: `sources/dspy/src/dspy-window.ui:567-584` — D-Spy groups members by category (Properties, Signals, Methods).
+
+---
+
+### 4.42 AdwActionRow with `subtitle-selectable`
+
+**Make subtitle text selectable for copy-paste (debugging/developer tools).**
+
+```xml
+<object class="AdwActionRow">
+  <property name="title" translatable="yes">Object Path</property>
+  <property name="subtitle" translatable="yes">/org/gnome/Builder</property>
+  <property name="subtitle-selectable">true</property>
+  <style>
+    <class name="property"/>
+  </style>
+</object>
+```
+
+**Real usage**: `sources/dspy/src/dspy-window.ui:933` — D-Spy uses this on every property detail row so users can copy D-Bus paths and signatures.
+
+---
+
 ## 5. Layout Recipes
 
 ### 5.1 Standard Preferences Window
@@ -1224,27 +1529,70 @@ Adw.ApplicationWindow {
 }
 ```
 
-### 5.4 Tabbed Document App Template
+### 5.5 MultiLayout Wide/Narrow Template
+
+**From Manuals — swaps entire layout structure at a breakpoint using AdwMultiLayoutView.**
 
 ```
 Adw.ApplicationWindow {
   width-request: 360;
 
-  Adw.Breakpoint { condition ("max-width: 650sp"); setter { layout.layout-name: "narrow"; }; }
+  Adw.Breakpoint {
+    condition ("max-width: 600sp");
+    setters { multi_layout.layout-name: "narrow"; }
+  }
 
-  Adw.MultiLayoutView layout {
-    [wide] Adw.Layout {
-      Adw.TabView tabs { };
-      Adw.TabBar tab_bar { view: tabs; };
+  content: Adw.MultiLayoutView multi_layout {
+    ["wide"] Adw.Layout {
+      Adw.LayoutSlot "statusbar" { PanelStatusbar { ... } }
+      Adw.LayoutSlot "stack" {
+        Adw.TabView tabs { }
+        Adw.TabBar tab_bar { view: tabs; }
+      }
     }
-    [narrow] Adw.Layout {
-      Adw.TabView tabs { };
-      Adw.TabBar tab_bar { view: tabs; };
+    ["narrow"] Adw.Layout {
+      Adw.LayoutSlot "sidebar_contents" {
+        Adw.NavigationSplitView {
+          Adw.NavigationPage sidebar { ... }
+          Adw.NavigationPage content {
+            Adw.ToolbarView {
+              [top] Adw.HeaderBar { Adw.TabButton { view: tabs; } }
+              content: Adw.TabOverview { child: tabs; }
+              [bottom] toolbar { ... }
+            }
+          }
+        }
+      }
     }
-  };
+  }
+}
+```
+
+### 5.6 Tabbed Browser Template (Wide/Narrow)
+
+**From Manuals — browser-style tabbed UI with AdwTabView + AdwTabBar (wide) / AdwTabOverview + AdwTabButton (narrow).**
+
+```
+Adw.ApplicationWindow {
+  Adw.Breakpoint { condition ("max-width: 600sp"); settlers { multi_layout.layout-name: "narrow"; }; }
+
+  Adw.MultiLayoutView multi_layout {
+    ["wide"] Adw.Layout {
+      AdwTabView tabs { menu-model: tab_menu; }
+      AdwTabBar tab_bar { view: tabs; }
+      // tabs content: one AdwTabPage per document
+    }
+    ["narrow"] Adw.Layout {
+      Adw.TabOverview { child: tabs; }
+      Adw.HeaderBar {
+        [end] Adw.TabButton { view: tabs; }
+        [end] Gtk.MenuButton { menu-model: primary_menu; }
+      }
+    }
+  }
 }
 ```
 
 ---
 
-*Token spec version: 0.1.0. Values extracted from: gnome-control-center, gnome-text-editor, nautilus, gnome-calculator, gnome-clocks, gnome-weather, loupe, gnome-software.*
+*Token spec version: 0.2.0. Values extracted from: 28 GNOME Core apps + 6 Dev Tools (Builder, D-Spy, Sysprof, Manuals, Boxes, Dconf Editor).*
