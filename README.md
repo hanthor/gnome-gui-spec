@@ -14,7 +14,7 @@ files its task needs — small models never see the full corpus.
 |-------|----------|
 | **Router** | [SKILL.md](SKILL.md) — task → file dispatch table + memorized defaults |
 | **21 skills** | [skills/](skills/) — self-contained how-tos: scaffold an app, preferences, adaptive layout, search, undo, a11y, Flatpak, and the [hig-audit](skills/hig-audit/SKILL.md) audit→fix workflow |
-| **17 components** | [components/](components/) — widget reference with Blueprint + XML + code |
+| **36 components** | [components/](components/) — one file per widget with Blueprint + XML + code; indexed in [COMPONENT-LIBRARY.md](COMPONENT-LIBRARY.md) |
 | **Design tokens** | [tokens/](tokens/) — spacing scale, typography classes, CSS classes, icon categories |
 | **Scripts** | [scripts/](scripts/) — `lint-app.sh` (automated HIG checks), `check-icons.sh` (validate icon names against the 645-icon catalog) |
 | **Reference** | [reference/hig/](reference/hig/) — all 47 HIG pages as markdown; [reference/icons.md](reference/icons.md) — 645 Adwaita symbolic icons |

@@ -36,9 +36,13 @@ master guide unless routing below fails.
 
 | You need | Read this |
 |----------|-----------|
-| A specific widget's Blueprint/XML API | `components/<widget>.md` (17 files, kebab-case names) or `COMPONENT-LIBRARY.md` for the full 42-widget catalog |
+| A specific widget's Blueprint/XML API | `components/<widget>.md` (36 files, kebab-case names; index in `COMPONENT-LIBRARY.md`) |
 | Spacing/margin values | `tokens/spacing.md` |
+| Window sizes, sidebar widths, breakpoints | `tokens/sizing.md` |
 | Font classes, capitalization | `tokens/typography.md` |
+| Window structure / which navigation pattern | `reference/app-architecture.md` |
+| App skeleton to copy | `reference/layout-recipes.md` or `reference/app-templates.md` |
+| What NOT to do + release checklist | `reference/anti-patterns.md` |
 | CSS style classes | `tokens/style-classes.md` |
 | Valid icon name | grep `reference/icons.md` (645 icons); validate with `scripts/check-icons.sh` |
 | "How does app X do Y?" | `INTENT-MAP.md` (intent → app → file:line, 34 apps) |

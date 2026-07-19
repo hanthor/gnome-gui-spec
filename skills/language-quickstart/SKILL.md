@@ -518,3 +518,12 @@ modules:
 | Blueprint | `blueprint-compiler` | `blueprint-compiler` |
 | AppStream | `appstream` | `appstream` |
 | desktop-file-utils | `desktop-file-utils` | `desktop-file-utils` |
+
+## Per-Language Gotchas
+
+- **Rust**: subclass with `#[derive(glib::Properties)]`; use `glib::Binding` for settings; compile `.blp` in `build.rs`.
+- **Python**: always call `gi.require_version()` before importing `Gtk`/`Adw`.
+- **C**: most core GNOME apps; best documentation coverage.
+- **Vala**: GNOME-native, compiles to C (Calculator).
+- **GJS**: used by Weather and Shell extensions.
+- **Blueprint**: recommended UI format; `blueprint-compiler compile file.blp --output file.ui`.

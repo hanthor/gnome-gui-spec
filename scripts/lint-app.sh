@@ -32,51 +32,55 @@ fi
 section "GSettings schemas"
 schemas=$(find . -name '*.gschema.xml' -not -path '*/build/*' -not -path '*/_build/*')
 if [ -n "$schemas" ]; then
+  schema_ok=1
   while IFS= read -r schema; do
     # key names must be kebab-case
     bad_keys=$(grep -oE 'name="[^"]*"' "$schema" | grep -E 'name="[^"]*[A-Z_][^"]*"' || true)
-    [ -n "$bad_keys" ] && finding "$schema: non-kebab-case key(s): $(echo "$bad_keys" | tr '\n' ' ')"
+    if [ -n "$bad_keys" ]; then
+      finding "$schema: non-kebab-case key(s): $(echo "$bad_keys" | tr '\n' ' ')"
+      schema_ok=0
+    fi
     if command -v glib-compile-schemas >/dev/null 2>&1; then
       dir=$(mktemp -d); cp "$schema" "$dir/"
-      glib-compile-schemas --strict --dry-run "$dir" 2>&1 | grep -v '^$' | while read -r l; do echo "      $l"; done
-      glib-compile-schemas --strict --dry-run "$dir" >/dev/null 2>&1 || finding "$schema: fails glib-compile-schemas --strict"
+      if ! glib-compile-schemas --strict --dry-run "$dir" >/dev/null 2>&1; then
+        finding "$schema: fails glib-compile-schemas --strict"
+        glib-compile-schemas --strict --dry-run "$dir" 2>&1 | head -5 | sed 's/^/      /'
+        schema_ok=0
+      fi
       rm -rf "$dir"
     fi
   done <<< "$schemas"
+  [ "$schema_ok" = 1 ] && echo "  ok ($(echo "$schemas" | wc -l) schema(s))"
 else
   echo "  (no .gschema.xml — apps that persist state should have one)"
 fi
 
+report_hits() { # $1=hits $2=advice $3=max-lines
+  if [ -n "$1" ]; then
+    fail=1
+    echo "$1" | head -"${3:-10}" | sed 's/^/  ✗ /'
+    echo "      → $2"
+  else
+    echo "  ok"
+  fi
+}
+
 section "Deprecated widgets"
 deprecated='GtkDialog|GtkMessageDialog|GtkFileChooserDialog|AdwFlap|AdwLeaflet|AdwSqueezer|GtkAssistant'
 hits=$(grep -rnE "$deprecated" --include='*.blp' --include='*.ui' --include='*.py' --include='*.rs' --include='*.c' --include='*.vala' --include='*.js' . 2>/dev/null | grep -v -e build/ -e target/ || true)
-if [ -n "$hits" ]; then
-  echo "$hits" | head -20 | while IFS= read -r h; do finding "$h"; done
-  echo "      → use AdwDialog/AdwAlertDialog, GtkFileDialog, OverlaySplitView/NavigationSplitView, AdwNavigationView"
-else
-  echo "  ok"
-fi
+report_hits "$hits" "use AdwDialog/AdwAlertDialog, GtkFileDialog, OverlaySplitView/NavigationSplitView, AdwNavigationView" 20
 
 section "Hardcoded colors in UI/CSS"
 hits=$(grep -rnE '#[0-9a-fA-F]{6}\b|rgba?\(' --include='*.css' --include='*.blp' --include='*.ui' . 2>/dev/null | grep -v -e build/ -e '@' || true)
-if [ -n "$hits" ]; then
-  echo "$hits" | head -10 | while IFS= read -r h; do finding "$h"; done
-  echo "      → prefer named Adwaita colors (@accent_bg_color, @error_color, …)"
-else
-  echo "  ok"
-fi
+report_hits "$hits" "prefer named Adwaita colors (@accent_bg_color, @error_color, …)"
 
 section "Ellipsis"
 hits=$(grep -rn '\.\.\.' --include='*.blp' --include='*.ui' . 2>/dev/null | grep -v build/ || true)
-if [ -n "$hits" ]; then
-  echo "$hits" | head -10 | while IFS= read -r h; do finding "$h"; done
-  echo "      → use the … character, not three dots"
-else
-  echo "  ok"
-fi
+report_hits "$hits" "use the … character, not three dots"
 
 section "Icon names"
-bash "$SPEC_DIR/scripts/check-icons.sh" . | sed 's/^/  /' || fail=1
+icon_out=$(bash "$SPEC_DIR/scripts/check-icons.sh" .) || fail=1
+echo "$icon_out" | sed 's/^/  /'
 
 echo
 if [ "$fail" = 0 ]; then

@@ -79,4 +79,4 @@ All 47 content pages from the official [GNOME Human Interface Guidelines](https:
 ## Icon Catalog
 | # | File | Topic |
 |---|------|-------|
-| 47 | [icons.md](../icons.md) | **645 symbolic icons** by category |
+| 47 | [icons.md](icons.md) | **645 symbolic icons** by category |

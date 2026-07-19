@@ -45,22 +45,24 @@
 | [scripts/lint-app.sh](scripts/lint-app.sh) | Blueprint syntax, schemas, deprecated widgets, hardcoded colors, ellipsis, icons |
 | [scripts/check-icons.sh](scripts/check-icons.sh) | Every `-symbolic` icon name against the 645-icon Adwaita catalog, with suggestions |
 
-## Components (17 widget files)
-Each has Blueprint + XML + code examples: [components/](components/) —
-application-window, header-bar, toolbar-view, preferences-group, switch-row,
-action-row, combo-row, spin-row, button-row, expander-row, view-stack,
-breakpoint, status-page, toast, button, menu, clamp.
-Full 42-widget catalog: [COMPONENT-LIBRARY.md](COMPONENT-LIBRARY.md).
+## Components (36 widget files)
+One file per widget with Blueprint + XML + code examples in
+[components/](components/), indexed by category in
+[COMPONENT-LIBRARY.md](COMPONENT-LIBRARY.md).
 
 ## Design Tokens
 | File | Contents |
 |------|----------|
 | [tokens/spacing.md](tokens/spacing.md) | Margin, padding, spacing scale |
+| [tokens/sizing.md](tokens/sizing.md) | Window sizing, sidebar widths, breakpoints |
 | [tokens/typography.md](tokens/typography.md) | Font classes, capitalization rules |
 | [tokens/style-classes.md](tokens/style-classes.md) | CSS class reference + compound patterns |
 | [tokens/icons.md](tokens/icons.md) | Symbolic icon reference by category |
 
 ## Reference
+- [reference/app-architecture.md](reference/app-architecture.md) — window structure, navigation choice, adaptive strategy, project layout
+- [reference/app-templates.md](reference/app-templates.md) · [reference/layout-recipes.md](reference/layout-recipes.md) — skeleton widget trees
+- [reference/anti-patterns.md](reference/anti-patterns.md) — anti-patterns + build checklist
 - [reference/hig/](reference/hig/) — all **47 GNOME HIG pages** as markdown
 - [reference/icons.md](reference/icons.md) — **645 Adwaita symbolic icons**
 

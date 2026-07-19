@@ -89,3 +89,20 @@ row.set_activatable_widget(switch)
 - ../skills/radio-group/SKILL.md
 - components/switch-row.md
 - components/preferences-group.md
+
+## Selectable Subtitle (`subtitle-selectable`)
+
+**Make subtitle text selectable for copy-paste (debugging/developer tools).**
+
+```xml
+<object class="AdwActionRow">
+  <property name="title" translatable="yes">Object Path</property>
+  <property name="subtitle" translatable="yes">/org/gnome/Builder</property>
+  <property name="subtitle-selectable">true</property>
+  <style>
+    <class name="property"/>
+  </style>
+</object>
+```
+
+**Real usage**: `sources/dspy/src/dspy-window.ui:933` — D-Spy uses this on every property detail row so users can copy D-Bus paths and signatures.
