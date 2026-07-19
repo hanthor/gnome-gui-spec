@@ -75,8 +75,17 @@ hits=$(grep -rnE '#[0-9a-fA-F]{6}\b|rgba?\(' --include='*.css' --include='*.blp'
 report_hits "$hits" "prefer named Adwaita colors (@accent_bg_color, @error_color, …)"
 
 section "Ellipsis"
-hits=$(grep -rn '\.\.\.' --include='*.blp' --include='*.ui' . 2>/dev/null | grep -v build/ || true)
+# UI files: any '...' is wrong. Source files: only inside string literals.
+hits=$(
+  { grep -rn '\.\.\.' --include='*.blp' --include='*.ui' . 2>/dev/null
+    grep -rnE '"[^"]*\.\.\.[^"]*"' --include='*.py' --include='*.rs' --include='*.c' --include='*.vala' --include='*.js' \
+      --exclude-dir=tests --exclude-dir=test --exclude-dir=docs . 2>/dev/null
+  } | grep -v -e build/ -e target/ || true)
 report_hits "$hits" "use the … character, not three dots"
+
+section "Untranslated tooltips in code-built UI"
+hits=$(grep -rnE 'set_tooltip_text\s*\(\s*(Some\s*\(\s*)?"' --include='*.py' --include='*.rs' --include='*.c' --include='*.vala' --include='*.js' . 2>/dev/null | grep -v -e build/ -e target/ || true)
+report_hits "$hits" 'wrap user-visible strings in gettext: _("…") / tr("…")' 15
 
 section "Icon names"
 icon_out=$(bash "$SPEC_DIR/scripts/check-icons.sh" .) || fail=1
