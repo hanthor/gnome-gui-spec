@@ -56,5 +56,5 @@ adw_toolbar_view_set_content(toolbar, GTK_WIDGET(page));
 ```
 
 ## See Also
-- skills/header-bar.md
-- skills/view-switcher.md
+- ../skills/header-bar/SKILL.md
+- ../skills/view-switcher/SKILL.md

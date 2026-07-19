@@ -86,6 +86,6 @@ row.set_activatable_widget(switch)
 ```
 
 ## See Also
-- skills/radio-group.md
+- ../skills/radio-group/SKILL.md
 - components/switch-row.md
 - components/preferences-group.md

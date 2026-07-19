@@ -88,4 +88,4 @@ adw_header_bar_set_centering_policy(header, ADW_CENTERING_POLICY_STRICT);
 ```
 
 ## See Also
-- skills/header-bar.md
+- ../skills/header-bar/SKILL.md

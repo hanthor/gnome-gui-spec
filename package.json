@@ -1,7 +1,7 @@
 {
   "name": "gnome-gui-spec",
-  "version": "1.1.0",
-  "description": "GNOME GUI specification, design tokens, component library, and agent skills for building GNOME-compliant GTK4/libadwaita applications",
+  "version": "2.0.0",
+  "description": "Build, audit, and improve GNOME GTK4/libadwaita apps with AI agents: design tokens, component library, 21 pattern skills, HIG mirror, 34 app audits, and lint scripts",
   "keywords": [
     "pi-package",
     "gnome",

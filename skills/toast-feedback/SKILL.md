@@ -1,3 +1,8 @@
+---
+name: gnome-toast-feedback
+description: In-app notifications: AdwToast/ToastOverlay with undo buttons, when to use toasts vs banners vs dialogs. Use when giving feedback after user actions in a GNOME app.
+---
+
 # Skill: Toast Notifications & Feedback
 
 ## Goal: Show transient feedback with optional undo actions.

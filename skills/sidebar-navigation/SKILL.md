@@ -1,3 +1,8 @@
+---
+name: gnome-sidebar-navigation
+description: Sidebar layouts: AdwNavigationSplitView vs OverlaySplitView, sidebar widths, collapse breakpoints, navigation-sidebar styling. Use when adding a sidebar or master-detail layout to a GNOME app.
+---
+
 # Skill: Sidebar Navigation
 
 ## Goal: Add a sidebar for many views or dynamic content.

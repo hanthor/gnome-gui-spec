@@ -1,3 +1,8 @@
+---
+name: gnome-wizard-assistant
+description: Sequential multi-step setup flow (assistant/wizard) with AdwNavigationView, Back/Forward navigation, progress indication. Use when building onboarding or setup flows with ordered steps.
+---
+
 # Skill: Wizard / Setup Assistant
 
 ## Goal: Build a sequential setup flow with Back/Forward navigation.

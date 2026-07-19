@@ -1,3 +1,8 @@
+---
+name: gnome-radio-group
+description: Exclusive-choice UI: CheckButton radio groups in list rows, when to use them vs ComboRow vs ToggleGroup. Use when presenting mutually exclusive options in GNOME preferences or dialogs.
+---
+
 # Skill: Radio Button Groups
 
 ## Goal: Add mutually-exclusive option groups in preferences.

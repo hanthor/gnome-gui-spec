@@ -81,5 +81,5 @@ adw_toast_overlay_add_toast(overlay, toast);
 - Wrap **whole window** content in ToastOverlay
 
 ## See Also
-- skills/delete-with-undo.md
-- skills/toast-feedback.md
+- ../skills/delete-with-undo/SKILL.md
+- ../skills/toast-feedback/SKILL.md

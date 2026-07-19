@@ -1,3 +1,8 @@
+---
+name: gnome-view-switcher
+description: Flat page switching with AdwViewStack + AdwViewSwitcher (3-5 top-level views) and ViewSwitcherBar on narrow widths. Use when an app needs tabs/views in the header bar.
+---
+
 # Skill: Add ViewSwitcher Navigation
 
 ## Goal: Add flat page switching with 3-5 tabs to your app.

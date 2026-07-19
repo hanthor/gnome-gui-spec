@@ -58,5 +58,5 @@ Adw.ViewSwitcherBar { stack: main_stack; }                    /* bottom, narrow 
 **Rust**: `stack.set_visible_child_name("page2");`
 
 ## See Also
-- skills/view-switcher.md
-- skills/adaptive-layout.md
+- ../skills/view-switcher/SKILL.md
+- ../skills/adaptive-layout/SKILL.md

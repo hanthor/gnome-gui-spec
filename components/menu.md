@@ -89,5 +89,5 @@ menu primary_menu {
 ```
 
 ## See Also
-- skills/preferences-dialog.md (menu wiring)
-- skills/delete-with-undo.md (destructive menu items)
+- ../skills/preferences-dialog/SKILL.md (menu wiring)
+- ../skills/delete-with-undo/SKILL.md (destructive menu items)

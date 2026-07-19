@@ -64,4 +64,4 @@ page.set_icon_name("package-x-generic-symbolic")
 ```
 
 ## See Also
-- skills/empty-state.md
+- ../skills/empty-state/SKILL.md

@@ -67,5 +67,5 @@ gtk_window_set_default_size(GTK_WINDOW(window), 600, 500);
 ```
 
 ## See Also
-- skills/adaptive-layout.md
-- skills/header-bar.md
+- ../skills/adaptive-layout/SKILL.md
+- ../skills/header-bar/SKILL.md

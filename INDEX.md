@@ -1,73 +1,70 @@
-# GNOME Agent Library — Index
+# GNOME Agent Library — Full Index
 
-> Each skill folder contains a self-contained `SKILL.md`. Read them individually as needed.
+> Agents: start at [SKILL.md](SKILL.md) (the router) and read only what it
+> points to. This index is the complete human-browsable catalog.
 
 ## Master Reference
-- **[GNOME-AGENT-GUIDE.md](GNOME-AGENT-GUIDE.md)** — Complete 12-section specification (v1.1.0)
-- **[COMPONENT-LIBRARY.md](COMPONENT-LIBRARY.md)** — 42-component catalog with Blueprint/XML examples (v0.2.0)
+- **[GNOME-AGENT-GUIDE.md](GNOME-AGENT-GUIDE.md)** — Complete 12-section specification (HIG v47 + 34 app audits)
+- **[COMPONENT-LIBRARY.md](COMPONENT-LIBRARY.md)** — 42-component catalog with Blueprint/XML examples
 - **[INTENT-MAP.md](INTENT-MAP.md)** — Intent → pattern → code example lookup (34 apps)
 
-## Skills (How-To Guides)
-Each folder teaches one specific GNOME pattern.
+## Skills (21)
 
-| # | Folder | What You'll Learn |
-|---|--------|-------------------|
-| 1 | [preferences-dialog](skills/preferences-dialog/SKILL.md) | Add Preferences dialog + Ctrl+comma + GSettings |
-| 2 | [delete-with-undo](skills/delete-with-undo/SKILL.md) | 4-tier destructive action system + undo toasts |
-| 3 | [view-switcher](skills/view-switcher/SKILL.md) | Flat page switching with 3-5 tabs |
-| 4 | [adaptive-layout](skills/adaptive-layout/SKILL.md) | Breakpoints, responsive design, BottomSheet |
-| 5 | [header-bar](skills/header-bar/SKILL.md) | Header bar layout, buttons, tooltips |
-| 6 | [empty-state](skills/empty-state/SKILL.md) | Loading spinners, empty states, StatusPages |
-| 7 | [toast-feedback](skills/toast-feedback/SKILL.md) | Toasts, undo buttons, banners vs dialogs |
-| 8 | [radio-group](skills/radio-group/SKILL.md) | CheckButton radio groups in preferences |
-| 9 | [sidebar-navigation](skills/sidebar-navigation/SKILL.md) | OverlaySplitView, NavigationSplitView, Flap |
-| 10 | [tabbed-documents](skills/tabbed-documents/SKILL.md) | AdwTabView multi-document support |
-| 11 | [gsettings-backend](skills/gsettings-backend/SKILL.md) | GSettings schema, binding, window state |
-| 12 | [wizard-assistant](skills/wizard-assistant/SKILL.md) | Sequential setup flow, Back/Forward nav |
-| 13 | [carousel-tour](skills/carousel-tour/SKILL.md) | AdwCarousel onboarding with nav dots |
-| 14 | [quick-start](skills/quick-start/SKILL.md) | Minimal GNOME app from scratch in one file |
-| 15 | [language-quickstart](skills/language-quickstart/SKILL.md) | Build setup: Python, Rust, C, Vala, GJS + Flatpak |
+### Workflow
+| Folder | What it does |
+|--------|--------------|
+| [quick-start](skills/quick-start/SKILL.md) | Minimal compliant GNOME app from scratch |
+| [language-quickstart](skills/language-quickstart/SKILL.md) | Build setup: Python, Rust, C, Vala, GJS + Flatpak |
+| [hig-audit](skills/hig-audit/SKILL.md) | 12-category HIG compliance audit → fix loop |
+| [flatpak-packaging](skills/flatpak-packaging/SKILL.md) | Flatpak manifest, sandbox permissions, Flathub submission |
 
-## Components (Widget Reference)
-Each has Blueprint + XML + code examples.
+### Patterns
+| Folder | What it teaches |
+|--------|-----------------|
+| [preferences-dialog](skills/preferences-dialog/SKILL.md) | Preferences dialog + Ctrl+comma + GSettings |
+| [gsettings-backend](skills/gsettings-backend/SKILL.md) | GSettings schema, binding, window state |
+| [delete-with-undo](skills/delete-with-undo/SKILL.md) | 4-tier destructive action system + undo toasts |
+| [view-switcher](skills/view-switcher/SKILL.md) | Flat page switching with 3-5 tabs |
+| [tabbed-documents](skills/tabbed-documents/SKILL.md) | AdwTabView multi-document support |
+| [sidebar-navigation](skills/sidebar-navigation/SKILL.md) | OverlaySplitView, NavigationSplitView |
+| [adaptive-layout](skills/adaptive-layout/SKILL.md) | Breakpoints, responsive design, BottomSheet |
+| [header-bar](skills/header-bar/SKILL.md) | Header bar layout, buttons, tooltips |
+| [empty-state](skills/empty-state/SKILL.md) | Loading spinners, empty states, StatusPages |
+| [toast-feedback](skills/toast-feedback/SKILL.md) | Toasts, undo buttons, banners vs dialogs |
+| [search-pattern](skills/search-pattern/SKILL.md) | SearchBar, live filtering, no-results state |
+| [radio-group](skills/radio-group/SKILL.md) | CheckButton radio groups in preferences |
+| [wizard-assistant](skills/wizard-assistant/SKILL.md) | Sequential setup flow, Back/Forward nav |
+| [carousel-tour](skills/carousel-tour/SKILL.md) | AdwCarousel onboarding with nav dots |
+| [shortcuts-window](skills/shortcuts-window/SKILL.md) | Shortcuts help window + standard accelerators |
+| [about-dialog](skills/about-dialog/SKILL.md) | AdwAboutDialog + AppStream metainfo |
+| [accessibility](skills/accessibility/SKILL.md) | A11y labels, roles, keyboard nav, Orca testing |
 
-| # | File | Widget |
-|---|------|--------|
-| 1 | [application-window.md](components/application-window.md) | `AdwApplicationWindow` |
-| 2 | [header-bar.md](components/header-bar.md) | `AdwHeaderBar` |
-| 3 | [toolbar-view.md](components/toolbar-view.md) | `AdwToolbarView` |
-| 4 | [preferences-group.md](components/preferences-group.md) | `AdwPreferencesPage` + `AdwPreferencesGroup` |
-| 5 | [switch-row.md](components/switch-row.md) | `AdwSwitchRow` |
-| 6 | [action-row.md](components/action-row.md) | `AdwActionRow` (Switch, Scale, Radio) |
-| 7 | [combo-row.md](components/combo-row.md) | `AdwComboRow` |
-| 8 | [spin-row.md](components/spin-row.md) | `AdwSpinRow` |
-| 9 | [button-row.md](components/button-row.md) | `AdwButtonRow` |
-| 10 | [expander-row.md](components/expander-row.md) | `AdwExpanderRow` |
-| 11 | [view-stack.md](components/view-stack.md) | `AdwViewStack` + `AdwViewSwitcher` |
-| 12 | [breakpoint.md](components/breakpoint.md) | `AdwBreakpoint` + `AdwBreakpointBin` |
-| 13 | [status-page.md](components/status-page.md) | `AdwStatusPage` |
-| 14 | [toast.md](components/toast.md) | `AdwToast` + `AdwToastOverlay` |
-| 15 | [button.md](components/button.md) | `GtkButton` style reference |
-| 16 | [menu.md](components/menu.md) | `GtkMenuButton` + Menu models |
-| 17 | [clamp.md](components/clamp.md) | `AdwClamp` |
+## Scripts
+| Script | What it checks |
+|--------|----------------|
+| [scripts/lint-app.sh](scripts/lint-app.sh) | Blueprint syntax, schemas, deprecated widgets, hardcoded colors, ellipsis, icons |
+| [scripts/check-icons.sh](scripts/check-icons.sh) | Every `-symbolic` icon name against the 645-icon Adwaita catalog, with suggestions |
 
-## Design Tokens (Reference Values)
+## Components (17 widget files)
+Each has Blueprint + XML + code examples: [components/](components/) —
+application-window, header-bar, toolbar-view, preferences-group, switch-row,
+action-row, combo-row, spin-row, button-row, expander-row, view-stack,
+breakpoint, status-page, toast, button, menu, clamp.
+Full 42-widget catalog: [COMPONENT-LIBRARY.md](COMPONENT-LIBRARY.md).
 
-| # | File | Contents |
-|---|------|----------|
-| 1 | [spacing.md](tokens/spacing.md) | Margin, padding, spacing scale |
-| 2 | [typography.md](tokens/typography.md) | Font classes, capitalization rules |
-| 3 | [style-classes.md](tokens/style-classes.md) | CSS class reference + compound patterns |
-| 4 | [icons.md](tokens/icons.md) | Symbolic icon reference by category |
+## Design Tokens
+| File | Contents |
+|------|----------|
+| [tokens/spacing.md](tokens/spacing.md) | Margin, padding, spacing scale |
+| [tokens/typography.md](tokens/typography.md) | Font classes, capitalization rules |
+| [tokens/style-classes.md](tokens/style-classes.md) | CSS class reference + compound patterns |
+| [tokens/icons.md](tokens/icons.md) | Symbolic icon reference by category |
 
-## App Audits
-Individual audit reports for 28 GNOME Core apps + 6 Dev Tool scans in [audits/](audits/).
+## Reference
+- [reference/hig/](reference/hig/) — all **47 GNOME HIG pages** as markdown
+- [reference/icons.md](reference/icons.md) — **645 Adwaita symbolic icons**
 
-**Dev Tool scans** (Builder, D-Spy, Sysprof, Manuals, Boxes, Dconf Editor) — included in the component library, intent map, and agent guide.
-
-## HIG Reference
-16 official GNOME HIG pages extracted to markdown in [reference/hig/](reference/hig/).
-
----
-
-**Quick Start for Agents**: Read `skills/quick-start/SKILL.md` + `tokens/typography.md` + `tokens/spacing.md`.
+## App Audits (34)
+Pattern-harvest audits of GNOME Core apps + dev tools in [audits/](audits/).
+Template for new audits: [audits/TEMPLATE.md](audits/TEMPLATE.md).
+Compliance-audit framework: [audits/audit-framework.md](audits/audit-framework.md).

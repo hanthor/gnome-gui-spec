@@ -1,3 +1,8 @@
+---
+name: gnome-tabbed-documents
+description: Multi-document tabs with AdwTabView/TabBar/TabOverview — tab menus, pinning, keyboard shortcuts. Use when an app opens multiple documents or sessions in tabs.
+---
+
 # Skill: Tabbed Documents
 
 ## Goal: Support multiple open documents in an editor/viewer.

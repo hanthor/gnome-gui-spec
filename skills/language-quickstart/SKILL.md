@@ -1,3 +1,8 @@
+---
+name: gnome-language-quickstart
+description: Build-system setup for GNOME apps per language: Python/PyGObject, Rust/gtk-rs, C, Vala, JavaScript/GJS — meson files, blueprint-compiler wiring, Flatpak manifests. Use when choosing a language for a GNOME app or setting up its build.
+---
+
 # Skill: Language & Library Quickstart
 
 > Pick your language. Each section is self-contained — copy the files and run.

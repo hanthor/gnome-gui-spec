@@ -1,3 +1,8 @@
+---
+name: gnome-quick-start
+description: Scaffold a minimal GNOME-compliant GTK4/libadwaita app from scratch — window, header bar, ViewSwitcher, adaptive breakpoint, menu, preferences, GSettings schema, desktop entry, meson. Use when starting a new GNOME app or when the user asks for a GNOME app template.
+---
+
 # Skill: Quick Start — New GNOME App From Scratch
 
 ## Goal: Create a minimal compliant GNOME app in one file.
@@ -262,6 +267,8 @@ myapp/
 - [ ] Implement shortcuts window
 
 ## Next Skills to Read
-- skills/gsettings-backend.md (wire up real settings)
-- skills/delete-with-undo.md (when you add destructive actions)
-- skills/header-bar.md (if you need custom header bar buttons)
+- `skills/gsettings-backend/SKILL.md` (wire up real settings)
+- `skills/shortcuts-window/SKILL.md` (implement the shortcuts TODO above)
+- `skills/about-dialog/SKILL.md` (metainfo + richer About dialog)
+- `skills/delete-with-undo/SKILL.md` (when you add destructive actions)
+- `skills/flatpak-packaging/SKILL.md` (ship it)

@@ -71,7 +71,7 @@ page.add(&group);
 ```
 
 ## See Also
-- skills/preferences-dialog.md
+- ../skills/preferences-dialog/SKILL.md
 - components/switch-row.md
 - components/action-row.md
 - components/combo-row.md

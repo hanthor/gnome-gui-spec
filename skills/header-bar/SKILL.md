@@ -1,3 +1,8 @@
+---
+name: gnome-header-bar
+description: AdwHeaderBar layout rules: button placement, flat/icon-only buttons, tooltips, title widgets, split buttons. Use when designing or fixing a GNOME app's header bar.
+---
+
 # Skill: Build a Header Bar
 
 ## Goal: Construct a compliant GNOME header bar.

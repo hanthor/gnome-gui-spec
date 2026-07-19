@@ -1,3 +1,8 @@
+---
+name: gnome-empty-state
+description: Loading, empty, and error states with AdwStatusPage and AdwSpinner — placeholder icons, titles, action buttons. Use when an app view can be empty, loading, or failed.
+---
+
 # Skill: Empty States & Loading Pages
 
 ## Goal: Show appropriate UI when there's no content or content is loading.

@@ -1,59 +1,84 @@
-# GNOME GUI Spec Project
+# gnome-gui-spec
 
-Systematic audit of GNOME official/certified apps to compile a comprehensive GUI specification and authoring guide for agents creating GNOME-compliant applications.
+**Build, audit, and improve GNOME apps with AI agents.**
 
-## Status
+A skill library and reference corpus for GTK4/libadwaita development, compiled
+from the GNOME HIG (v47, all 47 pages mirrored) and source audits of 34 real
+GNOME applications. Everything is plain markdown, structured for progressive
+disclosure: an agent reads a ~60-line router, then loads only the one or two
+files its task needs — small models never see the full corpus.
 
-| Category | Total | Audited | Remaining |
-|----------|-------|---------|-----------|
-| Core Apps | 27 | 9 | 18 |
-| Circle Apps | ~73 | 0 | ~73 |
-| Dev Tools | 6 | 0 | 6 |
+## What's inside
 
-## Deliverables
+| Layer | Contents |
+|-------|----------|
+| **Router** | [SKILL.md](SKILL.md) — task → file dispatch table + memorized defaults |
+| **21 skills** | [skills/](skills/) — self-contained how-tos: scaffold an app, preferences, adaptive layout, search, undo, a11y, Flatpak, and the [hig-audit](skills/hig-audit/SKILL.md) audit→fix workflow |
+| **17 components** | [components/](components/) — widget reference with Blueprint + XML + code |
+| **Design tokens** | [tokens/](tokens/) — spacing scale, typography classes, CSS classes, icon categories |
+| **Scripts** | [scripts/](scripts/) — `lint-app.sh` (automated HIG checks), `check-icons.sh` (validate icon names against the 645-icon catalog) |
+| **Reference** | [reference/hig/](reference/hig/) — all 47 HIG pages as markdown; [reference/icons.md](reference/icons.md) — 645 Adwaita symbolic icons |
+| **34 app audits** | [audits/](audits/) — how Settings, Files, Text Editor, Builder, Loupe, … actually build their UIs, with file:line citations |
+| **Master docs** | [GNOME-AGENT-GUIDE.md](GNOME-AGENT-GUIDE.md) (full spec), [COMPONENT-LIBRARY.md](COMPONENT-LIBRARY.md) (42 widgets), [INTENT-MAP.md](INTENT-MAP.md) (intent → app → code) |
 
-- **[GNOME-GUI-SPEC.md](GNOME-GUI-SPEC.md)** — The comprehensive specification (v0.2.0)
-  - Design principles, window architecture, navigation patterns
-  - Container patterns, control patterns, feedback patterns
-  - UI styling, adaptive design, settings architecture
-  - Framework tips (Rust, Python, C, Vala, JavaScript/GJS, Blueprint)
-  - App templates and anti-pattern checklists
+## Install
 
-- **[audits/](audits/)** — Per-app GUI audit reports
-- **[hig/](hig/)** — Mirrored GNOME Human Interface Guidelines (55 pages)
-- **[sources/](sources/)** — Cloned app repositories
-
-## Audited Apps
-
-| # | App | ID | Language | Key Patterns |
-|---|-----|----|----------|--------------|
-| 1 | Settings | org.gnome.Settings | C | PreferencesPage, BreakpointBin, ViewSwitcher, custom rows |
-| 2 | Text Editor | org.gnome.TextEditor | C | MultiLayoutView, TabView, OverlaySplitView, BottomSheet |
-| 3 | Files | org.gnome.Nautilus | C | PreferencesDialog, search-enabled, CheckButton radio groups |
-| 4 | Calculator | org.gnome.Calculator | Vala | Menu mode switching, NavigationPage sub-pages, StringList |
-| 5 | Clocks | org.gnome.clocks | C | NavigationView+ViewStack, breakpoints, Toast |
-| 6 | Weather | org.gnome.Weather | GJS | StatusPage, Stack transitions, GtkRevealer, Popover |
-| 7 | Image Viewer | org.gnome.Loupe | Rust | ShyBin fullscreen, AdwViewStack transitions, inline menu buttons |
-| 8 | Software | org.gnome.Software | C | header-suffix info, content-width, carousel, tiles |
-| 9 | Calendar | org.gnome.Calendar | C | ViewSwitcher+sidebar, AdwFlap |
-
-## To Continue
-
-Run the following to clone remaining core apps:
+**Claude Code** — as a skill:
 
 ```bash
-cd sources
-for app in gnome-console gnome-maps gnome-music epiphany gnome-system-monitor \
-  gnome-contacts gnome-logs gnome-characters gnome-font-viewer gnome-connections \
-  gnome-baobab gnome-disk-utility simple-scan papers yelp; do
-  git clone --depth 1 "https://gitlab.gnome.org/GNOME/$app.git" 2>&1 | tail -1 &
-done
+git clone https://github.com/hanthor/gnome-gui-spec ~/.claude/skills/gnome-gui
 ```
 
-## Contributing
+**pi** — as a package (`package.json` exposes `skills/`):
 
-1. Pick an unaudited app from the list above
-2. Clone its source into `sources/`
-3. Find UI definitions: `find . -name "*.ui" -o -name "*.blp"`
-4. Document the key patterns following the [audit template](#)
-5. Update GNOME-GUI-SPEC.md with any new patterns discovered
+```bash
+pi install github.com/hanthor/gnome-gui-spec
+```
+
+**Any agent** — clone anywhere and point the agent at `SKILL.md`:
+
+```
+Read /path/to/gnome-gui-spec/SKILL.md and follow its routing table.
+```
+
+## The three workflows
+
+**Build** — "make me a GNOME app that does X":
+agent reads `skills/quick-start/SKILL.md` → scaffolds window/menu/prefs/schema/meson
+→ pulls pattern skills as features demand → validates with `scripts/lint-app.sh`.
+
+**Audit** — "is this app HIG-compliant?":
+agent runs `scripts/lint-app.sh <dir>` for the automatable checks, then
+`skills/hig-audit/SKILL.md` for the 12-category deep audit (parallelizable
+across sub-agents), producing a severity-ranked `HIG-AUDIT.md`.
+
+**Improve** — "fix the violations":
+the hig-audit fix loop — one commit per category, breakage before polish,
+re-lint after each.
+
+## Design principle: progressive disclosure
+
+Agent context is expensive and small models drown in it. Rules this repo follows:
+
+- `SKILL.md` routes; it never teaches. Each skill teaches one pattern and fits
+  in a few hundred lines.
+- Skills link onward (`reference/hig/…`) instead of inlining; agents follow
+  links only when needed.
+- Every skill has YAML frontmatter (`name`, `description` with trigger
+  conditions) so harnesses can match without reading bodies.
+- Sub-agents get one category + one reference file, never the whole repo.
+
+## Contributing an app audit
+
+1. Clone the app's source; find UI files: `find . -name '*.ui' -o -name '*.blp'`
+2. Write `audits/<app>.md` following [audits/TEMPLATE.md](audits/TEMPLATE.md)
+3. Integrate: new patterns → `INTENT-MAP.md`, new values →
+   `GNOME-AGENT-GUIDE.md`, new widgets → `COMPONENT-LIBRARY.md`
+
+Unaudited so far: most of GNOME Circle (~73 apps).
+
+## License
+
+Apache-2.0. HIG content mirrored from [GNOME HIG](https://developer.gnome.org/hig/)
+(CC-BY-SA); audit snippets quote upstream apps under their respective licenses
+for documentation purposes.

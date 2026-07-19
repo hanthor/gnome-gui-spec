@@ -76,4 +76,4 @@ Button { label: _("_Right"); styles ["linked"]; }
 
 ## See Also
 - components/header-bar.md
-- skills/delete-with-undo.md
+- ../skills/delete-with-undo/SKILL.md

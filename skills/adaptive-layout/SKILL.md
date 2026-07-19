@@ -1,3 +1,8 @@
+---
+name: gnome-adaptive-layout
+description: Responsive GNOME layouts: AdwBreakpoint conditions, BreakpointBin, MultiLayoutView, BottomSheet, narrow/wide layout swaps. Use when making an app work on phones or narrow windows.
+---
+
 # Skill: Adaptive Layout with Breakpoints
 
 ## Goal: Make your app work from 360px phone to wide desktop.

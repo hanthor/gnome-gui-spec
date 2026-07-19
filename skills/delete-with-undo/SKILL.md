@@ -1,3 +1,8 @@
+---
+name: gnome-delete-with-undo
+description: Implement GNOME's 4-tier destructive-action pattern: undo toasts instead of confirmation dialogs, AdwAlertDialog for irreversible actions. Use when adding delete, remove, clear, or other destructive actions.
+---
+
 # Skill: Handle Destructive Actions
 
 ## The 4 Tiers

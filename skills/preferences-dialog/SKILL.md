@@ -1,3 +1,8 @@
+---
+name: gnome-preferences-dialog
+description: Add a standard GNOME preferences dialog (AdwPreferencesDialog) with Ctrl+comma shortcut, PreferencesPage/Group rows, and GSettings bindings. Use when adding settings or preferences UI to a GNOME app.
+---
+
 # Skill: Add a Preferences Dialog
 
 ## Goal

@@ -1,3 +1,8 @@
+---
+name: gnome-gsettings-backend
+description: Wire up GSettings: schema authoring, key naming, settings binding to widgets, window state persistence. Use when persisting app settings or window size/state in a GNOME app.
+---
+
 # Skill: GSettings Backend for Preferences
 
 ## Goal: Store app preferences using the GNOME standard GSettings/GSchema system.

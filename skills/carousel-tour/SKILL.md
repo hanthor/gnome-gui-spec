@@ -1,3 +1,8 @@
+---
+name: gnome-carousel-tour
+description: Onboarding tour with AdwCarousel and navigation dots, skippable welcome screens. Use when adding a first-run tour or feature showcase to a GNOME app.
+---
+
 # Skill: Carousel / Onboarding Tour
 
 ## Goal: Build a swipeable onboarding tour with navigation dots.

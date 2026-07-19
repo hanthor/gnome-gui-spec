@@ -54,4 +54,4 @@ Adw.BreakpointBin {
 | `layout.layout-name: "narrow"` | Switch layout in MultiLayoutView |
 
 ## See Also
-- skills/adaptive-layout.md
+- ../skills/adaptive-layout/SKILL.md
