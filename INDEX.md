@@ -8,7 +8,10 @@
 - **[COMPONENT-LIBRARY.md](COMPONENT-LIBRARY.md)** — 42-component catalog with Blueprint/XML examples
 - **[INTENT-MAP.md](INTENT-MAP.md)** — Intent → pattern → code example lookup (34 apps)
 
-## Skills (21)
+## Quickstart
+**[QUICKSTART.md](QUICKSTART.md)** — zero → app → Flatpak, with lanes for Python, Rust, C, GJS.
+
+## Skills (22)
 
 ### Workflow
 | Folder | What it does |
@@ -17,6 +20,7 @@
 | [language-quickstart](skills/language-quickstart/SKILL.md) | Build setup: Python, Rust, C, Vala, GJS + Flatpak |
 | [hig-audit](skills/hig-audit/SKILL.md) | 12-category HIG compliance audit → fix loop |
 | [flatpak-packaging](skills/flatpak-packaging/SKILL.md) | Flatpak manifest, sandbox permissions, Flathub submission |
+| [github-actions-ci](skills/github-actions-ci/SKILL.md) | CI, Flatpak release automation, Xvfb GUI smoke tests |
 
 ### Patterns
 | Folder | What it teaches |

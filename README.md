@@ -12,8 +12,9 @@ files its task needs — small models never see the full corpus.
 
 | Layer | Contents |
 |-------|----------|
+| **Quickstart** | [QUICKSTART.md](QUICKSTART.md) — zero → app → deployed Flatpak; lanes for Python, Rust, C, GJS |
 | **Router** | [SKILL.md](SKILL.md) — task → file dispatch table + memorized defaults |
-| **21 skills** | [skills/](skills/) — self-contained how-tos: scaffold an app, preferences, adaptive layout, search, undo, a11y, Flatpak, and the [hig-audit](skills/hig-audit/SKILL.md) audit→fix workflow |
+| **22 skills** | [skills/](skills/) — self-contained how-tos: scaffold an app, preferences, adaptive layout, search, undo, a11y, Flatpak, [CI/CD](skills/github-actions-ci/SKILL.md), and the [hig-audit](skills/hig-audit/SKILL.md) audit→fix workflow |
 | **36 components** | [components/](components/) — one file per widget with Blueprint + XML + code; indexed in [COMPONENT-LIBRARY.md](COMPONENT-LIBRARY.md) |
 | **Design tokens** | [tokens/](tokens/) — spacing scale, typography classes, CSS classes, icon categories |
 | **Scripts** | [scripts/](scripts/) — `lint-app.sh` (automated HIG checks), `check-icons.sh` (validate icon names against the 645-icon catalog) |

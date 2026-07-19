@@ -12,7 +12,9 @@ master guide unless routing below fails.
 
 | Your task | Read this |
 |-----------|-----------|
+| New app, end-to-end (scaffold → Flatpak) | `QUICKSTART.md` (lanes for Python, Rust, C, GJS) |
 | New app from scratch | `skills/quick-start/SKILL.md`, then `skills/language-quickstart/SKILL.md` for your language |
+| CI / GitHub Actions / release automation | `skills/github-actions-ci/SKILL.md` |
 | Audit / review / polish an existing app | `skills/hig-audit/SKILL.md` (quick automated pass: `scripts/lint-app.sh <dir>`) |
 | Preferences/settings UI | `skills/preferences-dialog/SKILL.md` |
 | Persist settings / window state | `skills/gsettings-backend/SKILL.md` |
