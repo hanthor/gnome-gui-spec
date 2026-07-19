@@ -8,8 +8,9 @@
 - **[COMPONENT-LIBRARY.md](COMPONENT-LIBRARY.md)** — 42-component catalog with Blueprint/XML examples
 - **[INTENT-MAP.md](INTENT-MAP.md)** — Intent → pattern → code example lookup (34 apps)
 
-## Quickstart
-**[QUICKSTART.md](QUICKSTART.md)** — zero → app → Flatpak, with lanes for Python, Rust, C, GJS.
+## Onboarding & Quickstart
+- **[ONBOARD.md](ONBOARD.md)** — point any agent at this file; it installs and learns the library itself
+- **[QUICKSTART.md](QUICKSTART.md)** — zero → app → Flatpak, with lanes for Python, Rust, C, GJS
 
 ## Skills (22)
 

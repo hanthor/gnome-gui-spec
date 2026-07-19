@@ -22,7 +22,18 @@ files its task needs — small models never see the full corpus.
 | **34 app audits** | [audits/](audits/) — how Settings, Files, Text Editor, Builder, Loupe, … actually build their UIs, with file:line citations |
 | **Master docs** | [GNOME-AGENT-GUIDE.md](GNOME-AGENT-GUIDE.md) (full spec), [COMPONENT-LIBRARY.md](COMPONENT-LIBRARY.md) (42 widgets), [INTENT-MAP.md](INTENT-MAP.md) (intent → app → code) |
 
-## Install
+## Onboard your agent (easiest)
+
+Paste this into any coding agent:
+
+```
+Read https://raw.githubusercontent.com/hanthor/gnome-gui-spec/main/ONBOARD.md and follow it.
+```
+
+The agent installs the library for its own harness, verifies it, learns the
+routing contract, and reports back. See [ONBOARD.md](ONBOARD.md).
+
+## Install manually
 
 **Claude Code** — as a skill:
 
